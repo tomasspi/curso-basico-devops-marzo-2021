@@ -2,10 +2,6 @@
 
 # Simple Web Application
 
-Esta es una simple aplicación web diseñada en Flask para prácticas del curso de DevOps
+Esta es una simple aplicación web diseñada en Flask para prácticas del curso de DevOps.
 
-## 1. Clonar repo
-```
-  $ git clone https://github.com/amrutja26/simple_web_application.git
-  $ cd curso-basico-devops-marzo-2021
-```
+**Forked from [here](https://github.com/craftech-academy/curso-basico-devops-marzo-2021) by Tomas Santiago Piñero**
