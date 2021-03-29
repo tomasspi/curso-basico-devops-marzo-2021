@@ -1,0 +1,44 @@
+# Utiliza la version 3.5 de compose
+version: "3.5"
+
+# servicios que se van a utilizar
+services:
+  # web app -> 'app.py', utiliza la imagen realizada en el Dockerfile
+  web-app:
+    # 'buildea' la imagen en el path dado
+    build: .
+    # si el contenedor termina con un codigo de salida de error, lo reinicia
+    restart: on-failure
+    # se mapea el puerto 5000 del contenedor (target) al 5000 del host (published)
+    ports:
+      - target: 5000
+        published: 5050
+    # namespace en el que se encuentra el servicio
+    networks:
+      - counter-net
+    # volumenes para el servicio (persistencia de datos)
+    volumes:
+      - ./templates:/app/templates
+
+  # servicio redis
+  redis:
+    image: "redis:alpine"
+    networks:
+      - counter-net
+
+  # redis commander, GUI para el servicio 'redis'
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    # variable de entorno para el build de la imagen
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - target: 8081
+        published: 5010
+    networks:
+      - counter-net
+
+# el namespace siempre se declara al final. En este namespace van a estar los
+# servicios
+networks:
+  counter-net:
