@@ -15,4 +15,4 @@ RUN pip3 install -r requirements.txt
 EXPOSE 5000
 
 #ejecuta la aplicacion
-CMD ["python3", "app.py"]
+CMD ["python3", "redis-app.py"]
