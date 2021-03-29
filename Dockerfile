@@ -8,11 +8,8 @@ WORKDIR /app
 #todo lo local ('.') a /app ('.')
 COPY . .
 
-#actualiza paquetes e instala pip3
-RUN apt-get update && \
-    apt-get install -y python3-pip
-
-RUN pip3 install flask
+#instala los requerimientos necesarios
+RUN pip3 install -r requirements.txt
 
 #etiqueta para mostrar el puerto en el que se sirve el contenedor
 EXPOSE 5000
