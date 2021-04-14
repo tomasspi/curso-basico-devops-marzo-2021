@@ -8,7 +8,7 @@ services:
     # 'buildea' la imagen en el path dado
     build: .
     # si el contenedor termina con un codigo de salida de error, lo reinicia
-    restart: on-failure
+    restart: always # para que lompose lo pase a 'deployment' y no 'pod'
     # se mapea el puerto 5000 del contenedor (target) al 5000 del host (published)
     ports:
       - target: 5000
@@ -17,8 +17,8 @@ services:
     networks:
       - counter-net
     # volumenes para el servicio (persistencia de datos)
-    volumes:
-      - ./templates:/app/templates
+    # volumes:
+    #   - ./templates:/app/templates
 
   # servicio redis
   redis:
