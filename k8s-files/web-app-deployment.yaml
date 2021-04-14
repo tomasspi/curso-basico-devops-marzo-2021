@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s-files/
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: web-app
+  name: web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: web-app
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s-files/
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/counter-net: "true"
+        io.kompose.service: web-app
+    spec:
+      containers:
+        - image: mistagreen/curso-devops-craftech
+          name: web-app
+          ports:
+            - containerPort: 5000
+          resources: {}
+      restartPolicy: Always
+status: {}
