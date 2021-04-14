@@ -9,6 +9,7 @@ metadata:
     io.kompose.service: web-app
   name: web-app
 spec:
+  type: NodePort
   ports:
     - name: "5050"
       port: 5050
