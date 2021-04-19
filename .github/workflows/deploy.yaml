@@ -47,7 +47,7 @@ jobs:
 
       - name: Deploy
         run: |-
-          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project curso-devops-craftech
           kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
