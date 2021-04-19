@@ -29,15 +29,15 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v2
 
-      - name: Push to Dockerhub
-        uses: docker/build-push-action@v1
-        with:
-            username: ${{ secrets.DOCKER_USERNAME }}
-            password: ${{ secrets.DOCKER_PASSWORD }}
-            repository: mistagreen/curso-devops-craftech
-            tag_with_ref: true
-            tag_with_sha: true
-            tags: latest, ${{ github.sha }}
+      # - name: Push to Dockerhub
+      #   uses: docker/build-push-action@v1
+      #   with:
+      #       username: ${{ secrets.DOCKER_USERNAME }}
+      #       password: ${{ secrets.DOCKER_PASSWORD }}
+      #       repository: mistagreen/curso-devops-craftech
+      #       tag_with_ref: true
+      #       tag_with_sha: true
+      #       tags: latest, ${{ github.sha }}
 
       - name: Setup gcloud CLI
         uses: google-github-actions/setup-gcloud@v0.2.0
@@ -53,7 +53,7 @@ jobs:
       - name: Deploy
         run: |-
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project curso-devops-craftech
-          kubectl set image gcr.io/curso-devops-craftech/$IMAGE:latest
+          kubectl set image gcr.io/curso-devops-craftech/curso:latest
           kubectl rollout status deployment/$DEPLOYMENT_NAME
 
       #   uses: cancue/eks-action@v0.0.2
