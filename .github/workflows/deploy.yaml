@@ -14,7 +14,7 @@ on:
 #   EKS_CLUSTER_NAME: craftech-academy
 
 env:
-  GKE_PROJECT: $${{ secrets.GKE_PROJECT }}
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: prod-cluster
   GKE_ZONE: us-central1-a
   DEPLOYMENT_NAME: web-app
