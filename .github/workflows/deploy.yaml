@@ -14,7 +14,7 @@ on:
 #   EKS_CLUSTER_NAME: craftech-academy
 
 env:
-  PROJECT_ID: $${{ secrets.GKE_PROJECT }}
+  GKE_PROJECT: $${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: prod-cluster
   GKE_ZONE: us-central1-a
   DEPLOYMENT_NAME: web-app
@@ -47,7 +47,7 @@ jobs:
 
       - name: Deploy
         run: |-
-          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $PROJECT_ID
+          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
