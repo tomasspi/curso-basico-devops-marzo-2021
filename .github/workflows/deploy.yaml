@@ -53,11 +53,9 @@ jobs:
       - name: Deploy
         run: |-
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project curso-devops-craftech
-#          ./kustomize edit set image mistagreen/curso-devops-craftech:latest
-#          ./kustomize build . | kubectl apply -f -
           kubectl set image deployment $DEPLOYMENT_NAME $IMAGE=mistagreen/curso-devops-craftech:latest
           kubectl rollout status deployment/$DEPLOYMENT_NAME
-      #    kubectl get services -o wide
+
       #   uses: cancue/eks-action@v0.0.2
       #   env:
       #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
