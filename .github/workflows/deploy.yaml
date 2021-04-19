@@ -43,7 +43,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
           service_account_key: ${{ secrets.GKE_SA_KEY }}
-          project_id: $GKE_PROJECT
+          project_id: ${{ secrets.GKE_PROJECT }}
 
       # - name: Set up Kustomize
       #   run: |
@@ -52,8 +52,8 @@ jobs:
 
       - name: Deploy
         run: |-
-          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-          kubectl set image gcr.io/$GKE_PROJECT/$IMAGE:latest
+          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project ${{ secrets.GKE_PROJECT }}
+          kubectl set image gcr.io/${{ secrets.GKE_PROJECT }}/$IMAGE:latest
           kubectl rollout status deployment/$DEPLOYMENT_NAME
 
       #   uses: cancue/eks-action@v0.0.2
