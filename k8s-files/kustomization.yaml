@@ -1,0 +1,11 @@
+commonLabels:
+  app: web-app
+resources:
+  - counter-net-networkpolicy.yaml
+  - redis-commander-deployment.yaml
+  - redis-commander-services.yaml
+  - redis-deployment.yaml
+  - redis-service.yaml
+  - web-app-deployment.yaml
+  - web-app-service.yaml
+  
