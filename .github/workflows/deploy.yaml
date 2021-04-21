@@ -13,7 +13,9 @@ env:
   IMAGE: curso
 
 jobs:
+  
   setup-build-publish-deploy:
+    if: contains(toJson(github.event.commits), 'NODEP') == false
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
@@ -52,10 +54,9 @@ jobs:
       run: |-
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
-    # Deploy the Docker image to the GKE cluster
+    # Deploy the Docker image to the GKE cluster    
     - name: Deploy
-    if: contains(toJson(github.event.commits), 'NODEP') == false
-    run: |-
-      kubectl set image deployment/$DEPLOYMENT_NAME curso-sha256-1=gcr.io/${PROJECT_ID}/$IMAGE:latest
-      kubectl rollout status deployment/$DEPLOYMENT_NAME
-      kubectl get services -o wide
+      run: |-
+        kubectl set image deployment/$DEPLOYMENT_NAME curso-sha256-1=gcr.io/${PROJECT_ID}/$IMAGE:latest
+        kubectl rollout status deployment/$DEPLOYMENT_NAME
+        kubectl get services -o wide
