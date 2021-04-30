@@ -42,8 +42,8 @@
     "react": "^16.3.1",
     "react-bootstrap-table-next": "^0.1.7",
     "react-breadcrumbs-dynamic": "^1.0.15",
-    "react-dev-utils": "^5.0.1",
-    "react-dom": "^16.3.1",
+    "react-dev-utils": "^5.0.3",
+    "react-dom": "^16.14.0",
     "react-ga": "^2.5.3",
     "react-geolocated": "^2.4.0",
     "react-moment": "^0.8.3",
@@ -116,8 +116,8 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "webpack-bundle-tracker": "^0.3.0",
+    "webpack-bundle-tracker": "^0.4.3",
     "webpack-cli": "^2.0.14",
-    "webpack-dev-server": "^2.11.2"
+    "webpack-dev-server": "^2.11.5"
   }
 }
