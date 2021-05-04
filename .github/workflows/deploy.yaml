@@ -53,9 +53,9 @@ jobs:
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
     # Deploy the Docker image to the GKE cluster
-    - name: Deploy
-    if: contains(toJson(github.event.commits), 'NODEP') == false
-    run: |-
-      kubectl set image deployment/$DEPLOYMENT_NAME curso-sha256-1=gcr.io/${PROJECT_ID}/$IMAGE:latest
-      kubectl rollout status deployment/$DEPLOYMENT_NAME
-      kubectl get services -o wide
+    - name: Deploy to production cluster
+      if: ${{ guthub.ref == 'refs/heads/master' }}
+      run: |-
+        kubectl set image deployment/$DEPLOYMENT_NAME curso-sha256-1=gcr.io/${PROJECT_ID}/$IMAGE:latest
+        kubectl rollout status deployment/$DEPLOYMENT_NAME
+        kubectl get services -o wide
