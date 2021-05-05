@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  DB_ENGINE: django.db.backends.postgresql
+  DB_HOST: db-service
+  DB_NAME: django
+  DB_PASS: django
+  DB_PORT: "5432"
+  DB_USER: django
+  DJANGO_DEBUG: "True"
+  ENDPOINT: http://backend:8000/api/requests-loan/
+  SECRET_KEY: 182n4hEaOLa0RQa8xRBbN60Kz6/nOUPfXovp0ShmwxE=
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: backend-env
+  name: env
