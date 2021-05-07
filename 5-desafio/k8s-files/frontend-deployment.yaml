@@ -17,50 +17,10 @@ spec:
     spec:
       containers:
         - env:
-            - name: DB_ENGINE
-              valueFrom:
-                configMapKeyRef:
-                  key: DB_ENGINE
-                  name: env
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  key: DB_HOST
-                  name: env
-            - name: DB_NAME
-              valueFrom:
-                configMapKeyRef:
-                  key: DB_NAME
-                  name: env
-            - name: DB_PASS
-              valueFrom:
-                configMapKeyRef:
-                  key: DB_PASS
-                  name: env
-            - name: DB_PORT
-              valueFrom:
-                configMapKeyRef:
-                  key: DB_PORT
-                  name: env
-            - name: DB_USER
-              valueFrom:
-                configMapKeyRef:
-                  key: DB_USER
-                  name: env
-            - name: DJANGO_DEBUG
-              valueFrom:
-                configMapKeyRef:
-                  key: DJANGO_DEBUG
-                  name: env
             - name: ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   key: ENDPOINT
-                  name: env
-            - name: SECRET_KEY
-              valueFrom:
-                configMapKeyRef:
-                  key: SECRET_KEY
                   name: env
           image: mistagreen/craftech-desafio-front:latest
           name: frontend
