@@ -52,11 +52,6 @@ spec:
                 configMapKeyRef:
                   key: DJANGO_DEBUG
                   name: env
-            - name: ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  key: ENDPOINT
-                  name: env
             - name: SECRET_KEY
               valueFrom:
                 configMapKeyRef:
