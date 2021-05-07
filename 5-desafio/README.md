@@ -16,6 +16,8 @@ Se necesita:
 	<img src="imgs/aws-deploy.png" alt="aws-deployment">
 	</p>
 
+	TODO: Explicar imagen.
+
 2. Dockerizar las aplicaciones Frontend y Backend;
 
 	Se creó un *Dockerfile* para cada componente. Para construir la imagen deseada se deben ingresar los siguientes comandos:
@@ -60,3 +62,5 @@ Se necesita:
 	<p align="center">
 	<img src="imgs/ci-cd.png" width="500" alt="ci-cd">
 	</p>
+
+	TODO: Explicar imagen.
