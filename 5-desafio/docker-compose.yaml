@@ -17,7 +17,7 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - ./.env
+      - ./.env-back
     depends_on:
       - db
     networks:
@@ -28,7 +28,7 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - ./.env
+      - ./.env-front
     networks:
       - app-net
 
