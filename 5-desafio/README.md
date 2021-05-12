@@ -16,7 +16,8 @@ Se necesita:
 	<img src="imgs/aws-deploy.png" alt="aws-deployment">
 	</p>
 
-	TODO: Explicar imagen.
+	Utilizar un *load balancer* de aplicación que redirigirá a los usuarios a las distintas instancias de la aplicación que corren en el servidor (*Elastic Virtual Server*, M4).
+	La base de datos consumida es una Relacional PostgreSQL.
 
 2. Dockerizar las aplicaciones Frontend y Backend;
 
@@ -63,4 +64,10 @@ Se necesita:
 	<img src="imgs/ci-cd.png" width="500" alt="ci-cd">
 	</p>
 
-	TODO: Explicar imagen.
+	En la imagen superior se muestra el *pipeline* CI/CD propuesto.
+
+	1. Se realiza un *push* al repositorio;
+	2. Se ejecuta un trabajo de *Github Actions* que publica la nueva imagen de la aplicación al Registro de Docker.
+	3. Realiza el *Deployment* en *AWS EKS* al clúster correspondiente:
+		- Si el *push* se realiza en la rama *development* la aplicación se despliega en *dev-cluster*.
+		- Si el *push* se realiza en la rama *main* la aplicación se despliega en *prod-cluster*.
