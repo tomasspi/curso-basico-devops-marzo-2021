@@ -13,7 +13,9 @@ env:
   IMAGE: curso
 
 jobs:
+  
   setup-build-publish-deploy:
+    if: contains(toJson(github.event.commits), 'NODEP') == false
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
