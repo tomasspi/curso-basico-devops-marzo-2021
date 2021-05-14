@@ -17,7 +17,8 @@ Se necesita:
 	</p>
 
 	Utilizar un *load balancer* de aplicación que redirigirá a los usuarios a las distintas instancias de la aplicación que corren en el servidor (*Elastic Virtual Server*, M4).
-	La base de datos consumida es una Relacional PostgreSQL.
+
+	La base de datos consumida es Relacional PostgreSQL.
 
 2. Dockerizar las aplicaciones Frontend y Backend;
 
