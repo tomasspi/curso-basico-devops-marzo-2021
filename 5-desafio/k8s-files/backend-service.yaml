@@ -3,8 +3,10 @@ kind: Service
 metadata:
   name: backend
 spec:
+  selector:
+    io.kompose.service: backend
+    app: backend
+    tier: backend
   ports:
     - port: 8000
       targetPort: 8000
-  selector:
-    io.kompose.service: backend

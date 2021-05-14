@@ -8,3 +8,5 @@ spec:
       targetPort: 3000
   selector:
     io.kompose.service: frontend
+    app: frontend
+    tier: frontend
