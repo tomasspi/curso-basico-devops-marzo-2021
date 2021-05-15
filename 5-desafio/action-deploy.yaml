@@ -1,12 +1,14 @@
-name: Build and Deploy
+name: Build and Deploy App
 
 on: push
 
 env:
-  BACK_IMAGE:  web-app
-  FRONT_IMAGE: web-app
-  K8S_NAMESPACE: web-app
-  K8S_DEPLOYMENT: web-app
+  BACK_IMAGE: mistagreen/craftech-desafio-back:${{ github.sha }}
+  FRONT_IMAGE: mistagreen/craftech-desafio-front:${{ github.sha }}
+  DEV_NAMESPACE: dev-ns
+  PROD_NAMESPACE: prod-ns
+  BACK_DEPLOYMENT: backend
+  FRONT_DEPLOYMENT: frontend
   AWS_REGION: us-east-1
   EKS_CLUSTER_NAME: challenge-craftech-academy
 
@@ -43,6 +45,8 @@ jobs:
           tag_with_sha: true
           tags: latest, ${{ github.sha }}
 
+      #Si el push tiene como referencia a la rama 'development' el deploy se
+      #realiza en el namespace de desarrollo
       - name: Deploy the images to development
         if: ${{ github.ref == 'refs/heads/development' }}
         uses: cancue/eks-action@v0.0.2
@@ -53,9 +57,13 @@ jobs:
           cluster_name: $EKS_CLUSTER_NAME
         with:
           args: |
-            kubectl set image deployment $K8S_DEPLOYMENT -n web-app-dev web-app=craftechacademy/curso-devops-2021:${{ github.sha }}
-            kubectl rollout status deployment/$K8S_DEPLOYMENT -n web-app-dev
+            kubectl set image deployment $BACK_DEPLOYMENT -n $DEV_NAMESPACE $BACK_DEPLOYMENT=$BACK_IMAGE
+            kubectl set image deployment $FRONT_DEPLOYMENT -n $DEV_NAMESPACE $FRONT_DEPLOYMENT=$FRONT_IMAGE
+            kubectl rollout status deployment/$BACK_DEPLOYMENT -n $DEV_NAMESPACE
+            kubectl rollout status deployment/$FRONT_DEPLOYMENT -n $DEV_NAMESPACE
 
+      #Si el push tiene como referencia a la rama 'main' el deploy se
+      #realiza en el namespace de producción
       - name: Deploy the images to production
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: cancue/eks-action@v0.0.2
@@ -66,5 +74,7 @@ jobs:
           cluster_name: $EKS_CLUSTER_NAME
         with:
           args: |
-            kubectl set image deployment $K8S_DEPLOYMENT -n web-app-prd web-app=craftechacademy/curso-devops-2021:${{ github.sha }}
-            kubectl rollout status deployment/$K8S_DEPLOYMENT -n web-app-prd
+            kubectl set image deployment $BACK_DEPLOYMENT -n $PROD_NAMESPACE $BACK_DEPLOYMENT=$BACK_IMAGE
+            kubectl set image deployment $FRONT_DEPLOYMENT -n $PROD_NAMESPACE $FRONT_DEPLOYMENT=$FRONT_IMAGE
+            kubectl rollout status deployment/$BACK_DEPLOYMENT -n $PROD_NAMESPACE
+            kubectl rollout status deployment/$FRONT_DEPLOYMENT -n $PROD_NAMESPACE
