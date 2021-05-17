@@ -16,8 +16,9 @@ Se necesita:
 	<img src="imgs/aws-deploy.png" alt="aws-deployment">
 	</p>
 
-	Utilizar un *load balancer* de aplicación que redirigirá a los usuarios a las distintas instancias de la aplicación que corren en el servidor (*Elastic Virtual Server*, M4).
-	La base de datos consumida es una Relacional PostgreSQL.
+	Utilizar un *load balancer* de aplicación que redirigirá a los usuarios a las distintas instancias de la aplicación que corren en el servidor (*Elastic Virtual Server*, M4) Linux.
+
+	La base de datos consumida es una instancia M4 que utiliza el motor PostgreSQL.
 
 2. Dockerizar las aplicaciones Frontend y Backend;
 
@@ -54,9 +55,9 @@ Se necesita:
 	```bash
 	$ kompose convert -o ./<directorio>
 	```
-	donde `<directorio>` es el lugar en el que se guardarán los manifiestos generados.
+	donde `<directorio>` es el lugar en el que se guardarán los manifiestos generados ([**k8s-files**](https://github.com/tomasspi/curso-basico-devops-marzo-2021/tree/development/5-desafio/k8s-files) en este caso).
 
-	Para poder conectar la base de datos con el *backend* se creó manualmente un servicio que expone la base de datos ([**k8s-files**](https://github.com/tomasspi/curso-basico-devops-marzo-2021/tree/development/5-desafio/k8s-files) en este caso).
+	Para poder conectar la base de datos con el *backend* se creó manualmente un servicio que expone la base de datos (*db-service.yaml*).
 
 5. Diseñar un pipeline de CI/CD de la aplicación frontend y backend que nos permita deployar en 2 entornos (dev y prod).
 
@@ -68,6 +69,8 @@ Se necesita:
 
 	1. Se realiza un *push* al repositorio;
 	2. Se ejecuta un trabajo de *Github Actions* que publica la nueva imagen de la aplicación al Registro de Docker.
-	3. Realiza el *Deployment* en *AWS EKS* al clúster correspondiente:
-		- Si el *push* se realiza en la rama *development* la aplicación se despliega en *dev-cluster*.
-		- Si el *push* se realiza en la rama *main* la aplicación se despliega en *prod-cluster*.
+	3. Realiza el *Deployment* en *AWS EKS* al *namespace* correspondiente del clúster:
+		- Si el *push* se realiza en la rama *development* la aplicación se despliega en *dev-namespace*.
+		- Si el *push* se realiza en la rama *main* la aplicación se despliega en *prod-namespace*.
+
+	El archivo que realiza este *workflow* es [action-deploy.yaml](https://github.com/tomasspi/curso-basico-devops-marzo-2021/blob/development/5-desafio/action-deploy.yaml). Para utilizarlo, se debe guardar en el directorio `.github/workflows` del repositorio.
